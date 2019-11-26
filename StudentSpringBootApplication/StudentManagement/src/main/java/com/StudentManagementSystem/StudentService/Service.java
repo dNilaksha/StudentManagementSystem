@@ -1,6 +1,7 @@
 package com.StudentManagementSystem.StudentService;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,32 +15,48 @@ public class Service implements ServiceImpl {
 
 	@Override
 	public List<Student> findAllStudents() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return studentrepository.findAll();
 	}
 
 	@Override
 	public Student findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Student> stud=studentrepository.findById(id);
+		
+		return stud.get();
 	}
 
 	@Override
 	public Student saveaAllStudent(Student students) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return studentrepository.save(students);
 	}
 
 	@Override
 	public Student updateStudents(Integer id, Student newStudent) {
-		// TODO Auto-generated method stub
+	
+		Optional<Student> stud=studentrepository.findById(id);
+		if(stud.isPresent()) {
+			Student st=stud.get();
+			
+			st.setName(newStudent.getName());
+			Student.setCollege(Student.getCollege());
+			st.setAge(newStudent.getAge());
+			
+			return studentrepository.save(st);
+			
+		}
 		return null;
+		
 	}
 
 	@Override
 	public void deleteById(Integer id) {
+		Optional<Student> st=studentrepository.findById(id);
+		if(st.isPresent()) {
 		studentrepository.deleteById(id);
-		
+		}
+		System.out.println("No available Value");
 	}
 
 	@Override

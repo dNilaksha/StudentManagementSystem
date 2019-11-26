@@ -1,20 +1,27 @@
 package com.StudentManagementSystem.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+
 
 @Entity
 public class Student {
 
 	@Id
-	private int sid;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer sid;
 	private String name;
 	private static String college;
 	private int age;
-	public int getSid() {
+	
+	
+	public Integer getSid() {
 		return sid;
 	}
-	public void setSid(int sid) {
+	public void setSid(Integer sid) {
 		this.sid = sid;
 	}
 	public String getName() {
